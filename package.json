@@ -1,0 +1,36 @@
+{
+  "name": "djob",
+  "version": "0.0.1",
+  "description": "A distribute job framework in Node.JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover node_modules/mocha/bin/_mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonz93/djob.git"
+  },
+  "keywords": [
+    "distribute",
+    "job"
+  ],
+  "author": "Sihao Zhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jasonz93/djob/issues"
+  },
+  "homepage": "https://github.com/jasonz93/djob#readme",
+  "dependencies": {
+    "arguejs": "^0.2.3",
+    "async": "^2.1.5",
+    "bluebird": "^3.5.0",
+    "bunyan": "^1.8.8",
+    "chai": "^3.5.0",
+    "cron-parser": "^2.3.1",
+    "etcd-cli": "0.1.x",
+    "istanbul": "^0.4.5",
+    "lodash": "^4.17.4",
+    "mocha": "^3.2.0",
+    "uuid": "^3.0.1"
+  }
+}
