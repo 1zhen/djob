@@ -1,15 +1,13 @@
 /**
  * Created by nicholas on 17-3-7.
  */
-const Job = require('../lib/job');
-const Etcd = require('etcd-cli');
 const {expect} = require('chai');
-const Client = require('../lib/client');
+const Client = require('../');
 const child_process = require('child_process');
 const path = require('path');
 
 describe('Test job', () => {
-    let etcd = new Client('127.0.0.1:2379');
+    let client = new Client('127.0.0.1:2379');
     let deadAt;
     it('Create a dead job', function (done) {
         this.timeout(30000);
@@ -24,7 +22,7 @@ describe('Test job', () => {
     it('Test start job', function (done) {
         this.timeout(15000);
         let times = 0;
-        let job = new Job(etcd, {
+        let job = client.createJob({
             namespace: 'dJobTest',
             name: 'testStartJob',
             cron: '*/1 * * * * *',
@@ -43,7 +41,7 @@ describe('Test job', () => {
         let started = false;
         let stopped = false;
         let runAfterStopped = 0;
-        let job = new Job(etcd, {
+        let job = client.createJob({
             namespace: 'dJobTest',
             name: 'testStopJob',
             cron: '*/1 * * * * *',
@@ -66,7 +64,7 @@ describe('Test job', () => {
     });
     it('Test re-elect a dead job', function (done) {
         this.timeout(30000);
-        let job = new Job(etcd, {
+        let job = client.createJob({
             namespace: 'dJobTest',
             name: 'testDeadJob',
             cron: '*/1 * * * * *',

@@ -1,8 +1,8 @@
 {
   "name": "djob",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A distribute job framework in Node.JS",
-  "main": "index.js",
+  "main": "lib/client.js",
   "scripts": {
     "test": "istanbul cover node_modules/mocha/bin/_mocha"
   },
@@ -25,12 +25,14 @@
     "async": "^2.1.5",
     "bluebird": "^3.5.0",
     "bunyan": "^1.8.8",
-    "chai": "^3.5.0",
     "cron-parser": "^2.3.1",
     "etcd-cli": "0.1.x",
-    "istanbul": "^0.4.5",
     "lodash": "^4.17.4",
-    "mocha": "^3.2.0",
     "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0"
   }
 }
