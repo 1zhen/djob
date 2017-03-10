@@ -11,15 +11,15 @@ const path = require('path');
 describe('Test job', () => {
     let etcd = new Client('127.0.0.1:2379');
     let deadAt;
-    // it('Create a dead job', function (done) {
-    //     this.timeout(30000);
-    //     let process = child_process.fork(path.join(__dirname, '../utils/long_job'));
-    //     process.on('message', () => {
-    //         deadAt = new Date();
-    //         process.kill();
-    //         done();
-    //     });
-    // });
+    it('Create a dead job', function (done) {
+        this.timeout(30000);
+        let process = child_process.fork(path.join(__dirname, '../utils/long_job'));
+        process.on('message', () => {
+            deadAt = new Date();
+            process.kill();
+            done();
+        });
+    });
 
     it('Test start job', function (done) {
         this.timeout(15000);
