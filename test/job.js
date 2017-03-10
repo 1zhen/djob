@@ -5,9 +5,22 @@ const Job = require('../lib/job');
 const Etcd = require('etcd-cli');
 const {expect} = require('chai');
 const Client = require('../lib/client');
+const child_process = require('child_process');
+const path = require('path');
 
 describe('Test job', () => {
     let etcd = new Client('127.0.0.1:2379');
+    let deadAt;
+    // it('Create a dead job', function (done) {
+    //     this.timeout(30000);
+    //     let process = child_process.fork(path.join(__dirname, '../utils/long_job'));
+    //     process.on('message', () => {
+    //         deadAt = new Date();
+    //         process.kill();
+    //         done();
+    //     });
+    // });
+
     it('Test start job', function (done) {
         this.timeout(15000);
         let times = 0;
@@ -51,4 +64,16 @@ describe('Test job', () => {
         });
         job.start();
     });
+    it('Test re-elect a dead job', function (done) {
+        this.timeout(30000);
+        let job = new Job(etcd, {
+            namespace: 'dJobTest',
+            name: 'testDeadJob',
+            cron: '*/1 * * * * *',
+            shards: 1
+        }, (shardInfo) => {
+            done();
+        });
+        job.start();
+    })
 });
